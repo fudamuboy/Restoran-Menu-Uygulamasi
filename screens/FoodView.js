@@ -3,6 +3,8 @@ import React, { useLayoutEffect } from 'react'
 import { FOODS, CATEGORIES } from '../data/dummy-data'
 import FoodItem from '../components/FoodItem'
 
+
+// la methode find attrape chacun sa part pour repartir chacuna sa partie 
 export default function FoodView({ route, navigation }) {
     const categoryId = route.params.categoryId
 

@@ -15,7 +15,7 @@ export default function CategoriesScreen({ navigation }) {
             });
         }
 
-        console.log(itemData.item);
+        // console.log(itemData.item);
         return (
             <CategoryComp title={itemData.item.title} color={itemData.item.color}
                 pressFood={pressHandler} />
