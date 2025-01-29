@@ -1,3 +1,5 @@
+// Only import react-native-gesture-handler on native platforms
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import CategoriesScreen from './screens/CategoriesScreen';
@@ -7,6 +9,7 @@ import FoodView from './screens/FoodView';
 import FoodDetailScreen from './screens/FoodDetailScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import FavoriteScreen from './screens/FavoriteScreen';
+import { DrawerNavigator } from './DrawerNavigator';
 
 
 
@@ -14,14 +17,14 @@ import FavoriteScreen from './screens/FavoriteScreen';
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
 
-function DrawerNavigator() {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Categories" component={CategoriesScreen} />
-      <Drawer.Screen name="Favorite" component={FavoriteScreen} />
-    </Drawer.Navigator>
-  );
-}
+// function DrawerNavigator() {
+//   return (
+//     <Drawer.Navigator>
+//       <Drawer.Screen name="Categories" component={CategoriesScreen} />
+//       <Drawer.Screen name="Favorite" component={FavoriteScreen} />
+//     </Drawer.Navigator>
+//   );
+// }
 export default function App() {
   return (
     <NavigationContainer>
@@ -32,7 +35,7 @@ export default function App() {
       }
 
       }>
-        <Stack.Screen name="Categories" component={CategoriesScreen} options={{ title: ' All categories' }} />
+
         <Stack.Screen name="Drawer" component={DrawerNavigator} options={{ headerShown: false }} />
         <Stack.Screen name="Food" component={FoodView} />
         <Stack.Screen name="FoodDetail" component={FoodDetailScreen} options={{ title: 'Contents' }} />
