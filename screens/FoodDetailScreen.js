@@ -2,17 +2,32 @@ import { ScrollView, StyleSheet, Text, View, Image, Pressable } from 'react-nati
 import React from 'react'
 import { FOODS } from '../data/dummy-data'
 import FoodGrid from '../components/FoodGrid'
-import { useLayoutEffect } from 'react'
+import { useLayoutEffect, useContext } from 'react'
 import Entypo from '@expo/vector-icons/Entypo';
+import { FavoritesContext } from '../store/favoritescontext'
 
-export default function FoodDetailScreen({ route, navigation }) {
+export default function FoodDetailScreen({ route, navigation, changeFavorite }) {
+
+    const favoriteFoodContext = useContext(FavoritesContext)
+
     const foodId = route.params.foodId
     const selectedFood = FOODS.find((food) => food.id === foodId)
-    // console.log(selectedFood);
+
+
+
+    const foodIsFavorite = favoriteFoodContext.ids.includes(foodId)
 
     const pressHandler = () => {
         console.log('Tiklandi');
 
+    }
+
+    function changeFavorite() {
+        if (foodIsFavorite) {
+            favoriteFoodContext.removeFavorite(foodId)
+        } else {
+            favoriteFoodContext.addFavorite(foodId)
+        }
     }
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -22,13 +37,14 @@ export default function FoodDetailScreen({ route, navigation }) {
                     <Pressable onPress={pressHandler} style={({ pressed }) => (pressed ? styles.Iconpressed : null)
                     }
                     >
-                        <Entypo name="star-outlined" size={24} color="orange" />
+                        <Entypo name={foodIsFavorite ? 'star' : 'star-outlined'} size={24} color="orange"
+                            onPress={changeFavorite} />
                     </Pressable >
                 )
             }
         })
 
-    }, [navigation])
+    }, [navigation, changeFavorite])
 
     return (
         <ScrollView style={styles.container}>
