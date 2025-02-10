@@ -2,49 +2,48 @@ import { ScrollView, StyleSheet, Text, View, Image, Pressable } from 'react-nati
 import React from 'react'
 import { FOODS } from '../data/dummy-data'
 import FoodGrid from '../components/FoodGrid'
-import { useLayoutEffect, useContext } from 'react'
-import Entypo from '@expo/vector-icons/Entypo';
+import { useLayoutEffect, useContext, useCallback } from 'react'
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { FavoritesContext } from '../store/favoritescontext'
 
-export default function FoodDetailScreen({ route, navigation, changeFavorite }) {
+export default function FoodDetailScreen({ route, navigation }) {
 
     const favoriteFoodContext = useContext(FavoritesContext)
 
     const foodId = route.params.foodId
     const selectedFood = FOODS.find((food) => food.id === foodId)
 
-
-
     const foodIsFavorite = favoriteFoodContext.ids.includes(foodId)
 
-    const pressHandler = () => {
-        console.log('Tiklandi');
-
-    }
-
-    function changeFavorite() {
+    const changeFavorite = useCallback(() => {
         if (foodIsFavorite) {
             favoriteFoodContext.removeFavorite(foodId)
         } else {
             favoriteFoodContext.addFavorite(foodId)
         }
-    }
+    }, [foodIsFavorite, favoriteFoodContext, foodId])
+
     useLayoutEffect(() => {
         navigation.setOptions({
 
             headerRight: () => {
                 return (
-                    <Pressable onPress={pressHandler} style={({ pressed }) => (pressed ? styles.Iconpressed : null)
-                    }
+                    <Pressable
+                        onPress={changeFavorite}
+                        style={({ pressed }) => (pressed ? styles.iconPressed : null)}
                     >
-                        <Entypo name={foodIsFavorite ? 'star' : 'star-outlined'} size={24} color="orange"
-                            onPress={changeFavorite} />
-                    </Pressable >
+                        {/* ✅ Ionicons ile düzeltildi */}
+                        <Ionicons
+                            name={foodIsFavorite ? 'star' : 'star-outline'}
+                            size={24}
+                            color="orange"
+                        />
+                    </Pressable>
                 )
             }
         })
 
-    }, [navigation, changeFavorite])
+    }, [navigation, changeFavorite, foodIsFavorite])
 
     return (
         <ScrollView style={styles.container}>
@@ -104,7 +103,7 @@ const styles = StyleSheet.create({
         borderBottomColor: 'orange',
         fontWeight: 'bold',
     },
-    Iconpressed: {
+    iconPressedpressed: {
         opacity: 0.5,
     },
 })
