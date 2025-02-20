@@ -11,10 +11,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import FavoriteScreen from './screens/FavoriteScreen';
 import { DrawerNavigator } from './DrawerNavigator';
 import FavoritesContextProvider from './store/favoritescontext';
-
-
-
-
+// import { Provider } from 'react-redux';
+// import { store } from './store/redux/store';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +21,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <FavoritesContextProvider>
+        {/* <Provider store={store}> */}
         <Stack.Navigator screenOptions={{
           headerStyle: { backgroundColor: 'white' },
           headerTintColor: 'black',
@@ -37,6 +36,7 @@ export default function App() {
 
 
         </Stack.Navigator>
+        {/* </Provider> */}
       </FavoritesContextProvider>
     </NavigationContainer>
 

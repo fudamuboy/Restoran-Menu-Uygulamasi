@@ -6,6 +6,7 @@ import FoodList from '../components/FoodList'
 
 
 
+
 export default function FavoriteScreen() {
     const favoriteFoodContext = useContext(FavoritesContext)
 
