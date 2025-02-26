@@ -18,3 +18,7 @@ Bu proje, React Native kullanarak yemek tariflerini listeleyen ve detaylarını 
     React Navigation 🔄
     Redux Toolkit (Henüz reducer eklenmedi) 🛠️
     Expo 📦
+
+![Image](https://github.com/user-attachments/assets/03d1c07f-acfd-4479-b358-ca3ad8438951)
+
+![Image](https://github.com/user-attachments/assets/a74c67f3-199f-455e-9a46-0bb2096ac319)
